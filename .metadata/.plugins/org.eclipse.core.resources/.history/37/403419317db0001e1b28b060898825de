@@ -1,0 +1,5 @@
+package com.letapp.photoapp.api.users.web;
+
+public class UsersController {
+
+}
