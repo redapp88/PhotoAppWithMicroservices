@@ -3,6 +3,7 @@ package com.letapp.photoapp.api.users.web;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +24,12 @@ import jakarta.validation.Valid;
 public class UsersController {
 	@Autowired
 	private UsersService usersService;
+	@Autowired
+	private Environment environment;
 	
 @GetMapping("/status/check")
 	public String status() {
-		return "working";
+		return "working on port : "+this.environment.getProperty("local.server.port")+" with token sercret: "+ this.environment.getProperty("token.secret") ;
 	}
 @PostMapping
 public ResponseEntity<CreateUserResponseModel> createUser(@Valid @RequestBody CreateUserRequestModel userRequest) {
